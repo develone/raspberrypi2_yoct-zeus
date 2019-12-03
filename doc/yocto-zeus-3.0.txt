@@ -1,0 +1,147 @@
+12/1/19
+**********************************
+Examining an earlier yocto build for a raspberrypi2
+Build Configuration:
+BB_VERSION        = "1.32.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Ubuntu-16.04"
+TARGET_SYS        = "arm-poky-linux-gnueabi"
+MACHINE           = "raspberrypi2"
+DISTRO            = "poky"
+DISTRO_VERSION    = "2.2"
+TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
+TARGET_FPU        = "hard"
+meta              
+meta-poky         
+meta-yocto-bsp    = "morty:5aa481dfedfd089f0d6e8a3bae1b84134d5dff4c"
+meta-raspberrypi  = "master:6bd1bfe472ea491c0edeb7c854d1c0cc5192afeb"
+meta-oe           
+meta-python       
+meta-multimedia   
+meta-gnome        = "morty:5aa481dfedfd089f0d6e8a3bae1b84134d5dff4c"
+meta-browser      = "master:1edcce7791b4cee9a515c1f11b351753a4f8b12e"
+
+vidal@ws009:~/wkg/yocto$ file core-image-sato-raspberrypi2-20161209235102.rootfs.rpi-sdimg 
+core-image-sato-raspberrypi2-20161209235102.rootfs.rpi-sdimg: DOS/MBR boot sector; partition 1 : ID=0xc, active, start-CHS (0x40,0,1), end-CHS (0x2bf,3,32), startsector 8192, 81920 sectors; partition 2 : ID=0x83, start-CHS (0x2c0,0,1), end-CHS (0x3ff,3,32), startsector 90112, 3891200 sectors
+90112 46137344
+
+vidal@ws009:~/wkg/yocto$ sudo mount core-image-sato-raspberrypi2-20161209235102.rootfs.rpi-sdimg -o offset=46137344 /mnt
+vidal@ws009:~/wkg/yocto$ ls /mnt
+bin   dev  home  lost+found  mnt   run   sys  usr
+boot  etc  lib   media       proc  sbin  tmp  var
+
+vidal@ws009:~/wkg/yocto$ ls /mnt/home/
+root
+
+Tested core-image-sato-raspberrypi2-20161209235102.rootfs.rpi-sdimg on Rpi2
+dd bs=16M if=core-image-sato-raspberrypi2-20161209235102.rootfs.rpi-sdimg status='progress' of=/dev/sda
+root@raspberrypi2:~# uname -a
+Linux raspberrypi2 4.4.28 #1 SMP Fri Dec 9 17:37:47 MST 2016 armv7l armv7l armv7l GNU/Linux
+
+root@raspberrypi2:~# df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/root        1791044 1404240    289524  83% /
+devtmpfs          493856       4    493852   1% /dev
+tmpfs                 40       0        40   0% /mnt/.psplash
+tmpfs             498188     132    498056   1% /run
+tmpfs             498188      88    498100   1% /var/volatile
+/dev/mmcblk0p1     40862   21276     19586  53% /run/media/mmcblk0p1
+
+**********************************
+
+12/2/19
+Testing yocto-zeus-3.0
+
+vidal@ws009:~/wkg$ mkdir yocto-zeus-3.0
+
+vidal@ws009:~/wkg$ cd yocto-zeus-3.0/
+
+vidal@ws009:~/wkg/yocto-zeus-3.0$ git clone -b zeus git://git.yoctoproject.org/poky.git
+
+vidal@ws009:~/wkg/yocto-zeus-3.0$ . poky/oe-init-build-env 
+You had no conf/local.conf file. This configuration file has therefore been
+created for you with some default values. You may wish to edit it to, for
+example, select a different MACHINE (target hardware). See conf/local.conf
+for more information as common configuration options are commented.
+
+You had no conf/bblayers.conf file. This configuration file has therefore been
+created for you with some default values. To add additional metadata layers
+into your configuration please add entries to conf/bblayers.conf.
+
+The Yocto Project has extensive documentation about OE including a reference
+manual which can be found at:
+    http://yoctoproject.org/documentation
+
+For more information about OpenEmbedded see their website:
+    http://www.openembedded.org/
+
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-sato
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86'
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ bitbake core-image-minimal 
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "ubuntu-16.04"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+Initialising tasks: 100% |#######################################| Time: 0:00:03
+Sstate summary: Wanted 818 Found 0 Missed 818 Current 0 (0% match, 0% complete)
+NOTE: Executing Tasks
+NOTE: Setscene tasks completed
+NOTE: Tasks Summary: Attempted 2654 tasks of which 1 didn't need to be rerun and all succeeded.
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ runqemu qemux86-64
+**********************************
+Testing adding the meta-raspberrypi layer & creating an image for a raspberrypi2
+vidal@ws009:~/wkg/yocto-zeus-3.0/poky$ git clone git://git.yoctoproject.org/meta-raspberrypi
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ diff conf/local.conf conf/local.conf.x86_64 
+38,39c38
+< #MACHINE ??= "qemux86-64"
+< MACHINE ??= "raspberrypi2"
+---
+> MACHINE ??= "qemux86-64"
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ bitbake core-image-minimal
+Parsing recipes: 100% |##########################################| Time: 0:00:33
+Parsing of 801 .bb files complete (0 cached, 801 parsed). 1327 targets, 67 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "raspberrypi2"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+meta-raspberrypi     = "master:ed6b75ba692b5d6bafd770f6669492db9cf97e37"
+
