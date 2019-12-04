@@ -27,8 +27,13 @@ meta-oe
 meta-python          
 meta-multimedia      = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
 
-6404 tasks
-
+7393 tasks
+root@ws009:/home/vidal/wkg/yocto-zeus-3.0/build/tmp/deploy/images/raspberrypi3# 
+dd bs=16M if=core-image-sato-raspberrypi3.rpi-sdimg status='progress' of=/dev/sdb
+2164260864 bytes (2.2 GB, 2.0 GiB) copied, 2.01258 s, 1.1 GB/s
+144+1 records in
+144+1 records out
+2420113408 bytes (2.4 GB, 2.3 GiB) copied, 257.03 s, 9.4 MB/s
 root@ws009:/home/vidal/wkg/yocto-zeus-3.0/build/tmp/deploy/images/raspberrypi3# ls -la core-image-sato-raspberrypi3.rpi-sdimg 
 lrwxrwxrwx 2 vidal vidal 60 Dec  4 10:22 core-image-sato-raspberrypi3.rpi-sdimg -> core-image-sato-raspberrypi3-20191204165725.rootfs.rpi-sdimg
 
@@ -43,4 +48,4 @@ root@ws009:/home/vidal/wkg/yocto-zeus-3.0/build/tmp/deploy/images/raspberrypi3# 
 
 root@ws009:/home/vidal/wkg/yocto-zeus-3.0/build/tmp/deploy/images/raspberrypi3# sync
 
-3800 packages were installed 
+4275 packages were installed 
