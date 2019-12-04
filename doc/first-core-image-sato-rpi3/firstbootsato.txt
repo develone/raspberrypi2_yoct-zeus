@@ -1,0 +1,18 @@
+Linux raspberrypi3 4.19.81 #1 SMP Tue Dec 3 21:20:39 UTC 2019 armv7l armv7l armv7l GNU/Linux
+eth0      Link encap:Ethernet  HWaddr B8:27:EB:07:C3:34  
+          inet addr:192.168.1.69  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: 2600:1700:69f0:42c0:ba27:ebff:fe07:c334/64 Scope:Global
+          inet6 addr: 2600:1700:69f0:42c0::3a/64 Scope:Global
+          inet6 addr: fe80::ba27:ebff:fe07:c334/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:408 errors:0 dropped:236 overruns:0 frame:0
+          TX packets:110 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:51606 (50.3 KiB)  TX bytes:15267 (14.9 KiB)
+
+Filesystem     1K-blocks   Used Available Use% Mounted on
+/dev/root        1122920 877856    183420  83% /
+devtmpfs          342304      4    342300   1% /dev
+tmpfs             473888    236    473652   1% /run
+tmpfs             473888     92    473796   1% /var/volatile
+/dev/mmcblk0p1     40314  29210     11104  73% /run/media/mmcblk0p1

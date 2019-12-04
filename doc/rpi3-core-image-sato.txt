@@ -1,0 +1,46 @@
+12/04/19
+vidal@ws009:~/wkg/yocto-zeus-3.0/repo120319/meta-openembedded$ git branch
+* zeus
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ rsync -avl --delete  ../repo120319/meta-openembedded/meta-python ../poky/
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ rsync -avl --delete  ../repo120319/meta-openembedded/meta-oe ../poky/
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ rsync -avl --delete  ../repo120319/meta-openembedded/meta-multimedia ../poky/
+
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ bitbake core-image-sato
+
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "raspberrypi3"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+meta-raspberrypi     = "master:ed6b75ba692b5d6bafd770f6669492db9cf97e37"
+meta-oe              
+meta-python          
+meta-multimedia      = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+
+6404 tasks
+
+root@ws009:/home/vidal/wkg/yocto-zeus-3.0/build/tmp/deploy/images/raspberrypi3# ls -la core-image-sato-raspberrypi3.rpi-sdimg 
+lrwxrwxrwx 2 vidal vidal 60 Dec  4 10:22 core-image-sato-raspberrypi3.rpi-sdimg -> core-image-sato-raspberrypi3-20191204165725.rootfs.rpi-sdimg
+
+root@ws009:/home/vidal/wkg/yocto-zeus-3.0/build/tmp/deploy/images/raspberrypi3# ls -la core-image-sato-raspberrypi3-20191204165725.rootfs.rpi-sdimg
+-rw-r--r-- 2 vidal vidal 1308622848 Dec  4 10:22 core-image-sato-raspberrypi3-20191204165725.rootfs.rpi-sdimg
+
+root@ws009:/home/vidal/wkg/yocto-zeus-3.0/build/tmp/deploy/images/raspberrypi3# dd bs=16M if=core-image-sato-raspberrypi3.rpi-sdimg status='progress' of=/dev/sdb
+1006632960 bytes (1.0 GB, 960 MiB) copied, 1.0162 s, 991 MB/s
+78+0 records in
+78+0 records out
+1308622848 bytes (1.3 GB, 1.2 GiB) copied, 184.122 s, 7.1 MB/s
+
+root@ws009:/home/vidal/wkg/yocto-zeus-3.0/build/tmp/deploy/images/raspberrypi3# sync
+
+3800 packages were installed 
