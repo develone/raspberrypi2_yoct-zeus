@@ -1,0 +1,6 @@
+Linux raspberrypi3 4.19.81 #1 SMP Tue Dec 3 21:20:39 UTC 2019 armv7l GNU/Linux
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/root                 6907      4673      1825  72% /
+devtmpfs                342304         0    342304   0% /dev
+tmpfs                   473888       104    473784   0% /run
+tmpfs                   473888        52    473836   0% /var/volatile
