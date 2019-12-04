@@ -1,0 +1,27 @@
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ bitbake core-image-minimal
+Parsing recipes: 100% |##########################################| Time: 0:00:28
+Parsing of 801 .bb files complete (0 cached, 801 parsed). 1327 targets, 67 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "raspberrypi3"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
+TARGET_FPU           = "hard"
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ file tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3-20191203211744.rootfs.rpi-sdimg 
+tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3-20191203211744.rootfs.rpi-sdimg: DOS/MBR boot sector; partition 1 : ID=0xc, active, start-CHS (0x40,0,1), end-CHS (0x2bf,3,32), startsector 8192, 81920 sectors; partition 2 : ID=0x83, start-CHS (0x2c0,0,1), end-CHS (0x33f,3,32), startsector 90112, 16384 sectors
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ sudo mount tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3-20191203211744.rootfs.rpi-sdimg -o offset=46137344 /mnt
+[sudo] password for vidal: 
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ ls /mnt
+bin   dev  home  lost+found  mnt   run   sys  usr
+boot  etc  lib   media       proc  sbin  tmp  var
+
+devel@mypi3-15:~ $ sudo dd bs=16M if=core-image-minimal-raspberrypi3-20191203211744.rootfs.rpi-sdimg status='progress' of=/dev/sda
+3+1 records in
+3+1 records out
+54525952 bytes (55 MB, 52 MiB) copied, 13.2225 s, 4.1 MB/s
