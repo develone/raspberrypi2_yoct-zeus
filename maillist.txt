@@ -1,2 +1,4 @@
+https://lists.yoctoproject.org/g/main
 yocto@lists.yoctoproject.org
 qrs
+https://lists.yoctoproject.org/g/yocto/topic/raspberry_pi_rpi3_does_not/66117572?p=,,,20,0,0,0::recentpostdate%2Fsticky,,,20,0,0,66117572
