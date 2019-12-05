@@ -1,0 +1,38 @@
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ bitbake meta-toolchain
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "raspberrypi3"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+meta-raspberrypi     = "master:ed6b75ba692b5d6bafd770f6669492db9cf97e37"
+meta-oe              
+meta-python          
+meta-multimedia      = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+
+3623 tasks
+vidal@ws009:~/wkg/yocto-zeus-3.0/build$ bitbake -c populate_sdk core-image-sato
+
+6661 tasks
+vidal@ws009:~/wkg/yocto-zeus-3.0/build/tmp/deploy/sdk$ ./poky-glibc-x86_64-core-image-sato-cortexa7t2hf-neon-vfpv4-raspberrypi3-toolchain-3.0.1.sh 
+Poky (Yocto Project Reference Distro) SDK installer version 3.0.1
+
+SDK has been successfully set up and is ready to be used.
+Each time you wish to use the SDK in a new shell session, you need to source the environment setup script e.g.
+ $ . /opt/poky/3.0.1/environment-setup-cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+
+vidal@ws009:~$ echo $PATH
+/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/bin:/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/sbin:/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/bin:/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/sbin:/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/bin/../x86_64-pokysdk-linux/bin:/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi:/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-musl:/home/vidal/bin:/home/vidal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+vidal@ws009:/opt/poky/3.0.1/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi$ pwd
+/opt/poky/3.0.1/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+vidal@ws009:/opt/poky/3.0.1/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi$ ls
+bin  boot  dev  etc  home  lib  media  mnt  proc  run  sbin  sys  tmp  usr  var
