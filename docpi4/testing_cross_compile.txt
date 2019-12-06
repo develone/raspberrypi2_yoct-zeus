@@ -1,0 +1,74 @@
+Testing cross compiling on Ubuntu 16.04 AMD 6 core
+1. Cross compile using the sdk on Ubuntu 16.04
+2. Test cross compiled on Rpi4 Raspbian.
+3. Test cross compiled on Rpi4 core-image-sato 
+
+1.
+cd wkg/test-yocto-sdk/
+git clone https://github.com/develone/svd_rgb.git
+cd svd_rgb/src/
+
+Set the enviorment for cross compiler sdk
+
+. /opt/poky/3.0.1/rpi4/environment-setup-cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+make -e
+see Cross compile output below.
+
+Cross compile 
+real	0m1.360s
+user	0m0.464s
+sys	0m0.132s
+Testing crosscompiled svd_rgb on a Rpi4 RaspBian.
+
+mkdir test_cross compiled
+cd test_crosscompiled/
+scp -r vidal@ws009:~/wkg/test-yocto-sdk/ .
+cd test-yocto-sdk/svd_rgb/src/
+file master
+master: ELF 32-bit LSB pie executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, BuildID[sha1]=e1e6770965b7114ec0c744521d37a81248ccf6ee, for GNU/Linux 3.2.0, with debug_info, not stripped
+cd svd_rgb/
+cd src/
+time ./master
+ 
+real	0m2.764s
+user	0m2.707s
+sys	0m0.051s
+
+octave
+disp_S
+
+Testing cross compiled on Rpi4 core-image-sato
+
+ssh to raspberrypi the core-image-sato 
+
+scp -r vidal@ws009:~/wkg/test-yocto-sdk/ .
+
+cd test-yocto-sdk/svd_rgb/src/
+
+file master
+master: ELF 32-bit LSB pie executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, BuildID[sha1]=e1e6770965b7114ec0c744521d37a81248ccf6ee, for GNU/Linux 3.2.0, with debug_info, not stripped
+
+time ./master
+real	0m6.600s
+user	0m6.536s
+sys	0m0.061s
+
+Cross compile output
+make -e
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -c -o obj/svd.o svd.c  -O2 -pipe -g -feliminate-unused-debug-types 
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -c -o obj/disp_mat.o disp_mat.c  -O2 -pipe -g -feliminate-unused-debug-types 
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -c -o obj/mul_mat.o mul_mat.c  -O2 -pipe -g -feliminate-unused-debug-types 
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -c -o obj/pnmio.o pnmio.c  -O2 -pipe -g -feliminate-unused-debug-types 
+pnmio.c: In function ‘pnmReadHeader’:
+pnmio.c:57:5: warning: implicit declaration of function ‘KLTError’ [-Wimplicit-function-declaration]
+   57 |     KLTError("(pnmReadHeader) Magic number does not begin with 'P', "
+      |     ^~~~~~~~
+pnmio.c:76:5: warning: implicit declaration of function ‘KLTWarning’ [-Wimplicit-function-declaration]
+   76 |     KLTWarning("(pnmReadHeader) Maxval is not 255, but %d", *maxval);
+      |     ^~~~~~~~~~
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -c -o obj/error.o error.c  -O2 -pipe -g -feliminate-unused-debug-types 
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -c -o obj/mythread.o mythread.c  -O2 -pipe -g -feliminate-unused-debug-types 
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -c -o obj/trans_mat.o trans_mat.c  -O2 -pipe -g -feliminate-unused-debug-types 
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -c -o obj/master.o master.c  -O2 -pipe -g -feliminate-unused-debug-types 
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -o master obj/svd.o obj/disp_mat.o obj/mul_mat.o obj/pnmio.o obj/error.o obj/mythread.o obj/trans_mat.o obj/master.o  -O2 -pipe -g -feliminate-unused-debug-types  -lm -lpthread
+
