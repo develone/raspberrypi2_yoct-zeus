@@ -1,0 +1,71 @@
+diff env.txt env1.txt
+1c1,9
+< XDG_SESSION_ID=18
+---
+> AS=arm-poky-linux-gnueabi-as 
+> LDFLAGS=-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+> AR=arm-poky-linux-gnueabi-ar
+> OECORE_TARGET_SYSROOT=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+> TARGET_PREFIX=arm-poky-linux-gnueabi-
+> XDG_SESSION_ID=17
+> M4=m4
+> OE_CMAKE_FIND_LIBRARY_CUSTOM_LIB_SUFFIX=
+> OE_CMAKE_TOOLCHAIN_FILE=/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/share/cmake/OEToolchainConfig.cmake
+4,5c12,16
+< SSH_CLIENT=2600:1700:69f0:42c0::48 36126 22
+< SSH_TTY=/dev/pts/6
+---
+> NM=arm-poky-linux-gnueabi-nm
+> OECORE_DISTRO_VERSION=3.0.1
+> CPPFLAGS=
+> SSH_CLIENT=2600:1700:69f0:42c0::48 36120 22
+> SSH_TTY=/dev/pts/1
+6a18,19
+> OECORE_SDK_VERSION=3.0.1
+> GDB=arm-poky-linux-gnueabi-gdb
+8a22,25
+> PKG_CONFIG_SYSROOT_DIR=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+> CXXFLAGS= -O2 -pipe -g -feliminate-unused-debug-types 
+> CONFIG_SITE=/opt/poky/3.0.1/rpi4/site-config-cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+> CPP=arm-poky-linux-gnueabi-gcc -E  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+10c27
+< PATH=/home/vidal/bin:/home/vidal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+---
+> PATH=/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/bin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/sbin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/bin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/sbin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/bin/../x86_64-pokysdk-linux/bin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-musl:/home/vidal/bin:/home/vidal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+11a29
+> LD=arm-poky-linux-gnueabi-ld  --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+12a31
+> STRIP=arm-poky-linux-gnueabi-strip
+13a33,40
+> OECORE_TARGET_ARCH=arm
+> OECORE_NATIVE_SYSROOT=/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux
+> CONFIGURE_FLAGS=--target=arm-poky-linux-gnueabi --host=arm-poky-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+> KCFLAGS=--sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+> CXX=arm-poky-linux-gnueabi-g++  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+> OBJCOPY=arm-poky-linux-gnueabi-objcopy
+> OECORE_TARGET_OS=linux-gnueabi
+> OECORE_BASELIB=lib
+15a43,44
+> OPENSSL_CONF=/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/lib/ssl-1.1/openssl.cnf
+> CFLAGS= -O2 -pipe -g -feliminate-unused-debug-types 
+18c47,49
+< SSH_CONNECTION=2600:1700:69f0:42c0::48 36126 2600:1700:69f0:42c0:599d:237:b:3b22 22
+---
+> SSH_CONNECTION=2600:1700:69f0:42c0::48 36120 2600:1700:69f0:42c0:599d:237:b:3b22 22
+> OECORE_ACLOCAL_OPTS=-I /opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/share/aclocal
+> PKG_CONFIG_PATH=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/pkgconfig:/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi/usr/share/pkgconfig
+19a51,54
+> ARCH=arm
+> RANLIB=arm-poky-linux-gnueabi-ranlib
+> CROSS_COMPILE=arm-poky-linux-gnueabi-
+> CC=arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+21c56,58
+< DISPLAY=localhost:11.0
+---
+> DISPLAY=localhost:10.0
+> READELF=arm-poky-linux-gnueabi-readelf
+> OBJDUMP=arm-poky-linux-gnueabi-objdump
+23c60,61
+< _=/usr/bin/env 
+---
+> SDKTARGETSYSROOT=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi

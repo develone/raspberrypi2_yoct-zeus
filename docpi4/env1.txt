@@ -1,0 +1,61 @@
+AS=arm-poky-linux-gnueabi-as 
+LDFLAGS=-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+AR=arm-poky-linux-gnueabi-ar
+OECORE_TARGET_SYSROOT=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+TARGET_PREFIX=arm-poky-linux-gnueabi-
+XDG_SESSION_ID=17
+M4=m4
+OE_CMAKE_FIND_LIBRARY_CUSTOM_LIB_SUFFIX=
+OE_CMAKE_TOOLCHAIN_FILE=/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/share/cmake/OEToolchainConfig.cmake
+TERM=xterm-256color
+SHELL=/bin/bash
+NM=arm-poky-linux-gnueabi-nm
+OECORE_DISTRO_VERSION=3.0.1
+CPPFLAGS=
+SSH_CLIENT=2600:1700:69f0:42c0::48 36120 22
+SSH_TTY=/dev/pts/1
+LC_ALL=en_US.UTF-8
+OECORE_SDK_VERSION=3.0.1
+GDB=arm-poky-linux-gnueabi-gdb
+USER=vidal
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+PKG_CONFIG_SYSROOT_DIR=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+CXXFLAGS= -O2 -pipe -g -feliminate-unused-debug-types 
+CONFIG_SITE=/opt/poky/3.0.1/rpi4/site-config-cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+CPP=arm-poky-linux-gnueabi-gcc -E  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+MAIL=/var/mail/vidal
+PATH=/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/bin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/sbin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/bin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/sbin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/bin/../x86_64-pokysdk-linux/bin:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi:/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-musl:/home/vidal/bin:/home/vidal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+QT_QPA_PLATFORMTHEME=appmenu-qt5
+LD=arm-poky-linux-gnueabi-ld  --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+PWD=/home/vidal
+STRIP=arm-poky-linux-gnueabi-strip
+LANG=en_US.UTF-8
+OECORE_TARGET_ARCH=arm
+OECORE_NATIVE_SYSROOT=/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux
+CONFIGURE_FLAGS=--target=arm-poky-linux-gnueabi --host=arm-poky-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+KCFLAGS=--sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+CXX=arm-poky-linux-gnueabi-g++  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+OBJCOPY=arm-poky-linux-gnueabi-objcopy
+OECORE_TARGET_OS=linux-gnueabi
+OECORE_BASELIB=lib
+SHLVL=1
+HOME=/home/vidal
+OPENSSL_CONF=/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/lib/ssl-1.1/openssl.cnf
+CFLAGS= -O2 -pipe -g -feliminate-unused-debug-types 
+LOGNAME=vidal
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+SSH_CONNECTION=2600:1700:69f0:42c0::48 36120 2600:1700:69f0:42c0:599d:237:b:3b22 22
+OECORE_ACLOCAL_OPTS=-I /opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/share/aclocal
+PKG_CONFIG_PATH=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/pkgconfig:/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi/usr/share/pkgconfig
+LESSOPEN=| /usr/bin/lesspipe %s
+ARCH=arm
+RANLIB=arm-poky-linux-gnueabi-ranlib
+CROSS_COMPILE=arm-poky-linux-gnueabi-
+CC=arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+XDG_RUNTIME_DIR=/run/user/1000
+DISPLAY=localhost:10.0
+READELF=arm-poky-linux-gnueabi-readelf
+OBJDUMP=arm-poky-linux-gnueabi-objdump
+LESSCLOSE=/usr/bin/lesspipe %s %s
+SDKTARGETSYSROOT=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+_=/usr/bin/env

@@ -1,0 +1,207 @@
+Linux raspberrypi4 4.19.81 #1 SMP Thu Dec 5 18:46:28 UTC 2019 armv7l armv7l armv7l GNU/Linux
+******************************
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/root        2107672 1630424    361332  82% /
+devtmpfs         1840368       4   1840364   1% /dev
+tmpfs            1972464     228   1972236   1% /run
+tmpfs            1972464     108   1972356   1% /var/volatile
+/dev/mmcblk0p1     40314   29533     10782  74% /run/media/mmcblk0p1
+******************************
+Module                  Size  Used by
+nfc                    86016  0
+8021q                  32768  0
+garp                   16384  1 8021q
+stp                    16384  1 garp
+llc                    16384  2 garp,stp
+bnep                   20480  2
+bluetooth             397312  9 bnep
+ecdh_generic           28672  1 bluetooth
+ipv6                  462848  46
+joydev                 20480  0
+bcm2835_codec          36864  0
+bcm2835_v4l2           49152  0
+v4l2_mem2mem           24576  1 bcm2835_codec
+bcm2835_mmal_vchiq     32768  2 bcm2835_codec,bcm2835_v4l2
+v4l2_common            16384  1 bcm2835_v4l2
+videobuf2_dma_contig    20480  1 bcm2835_codec
+videobuf2_vmalloc      16384  1 bcm2835_v4l2
+videobuf2_memops       16384  2 videobuf2_dma_contig,videobuf2_vmalloc
+videobuf2_v4l2         24576  3 bcm2835_codec,bcm2835_v4l2,v4l2_mem2mem
+videobuf2_common       45056  4 bcm2835_codec,bcm2835_v4l2,v4l2_mem2mem,videobuf2_v4l2
+brcmfmac              319488  0
+videodev              200704  6 bcm2835_codec,v4l2_common,videobuf2_common,bcm2835_v4l2,v4l2_mem2mem,videobuf2_v4l2
+brcmutil               20480  1 brcmfmac
+media                  36864  3 bcm2835_codec,videodev,v4l2_mem2mem
+vc_sm_cma              36864  1 bcm2835_mmal_vchiq
+rpivid_mem             16384  0
+evdev                  24576  4
+sha256_generic         20480  0
+vc4                   176128  6
+cfg80211              651264  1 brcmfmac
+rfkill                 28672  5 bluetooth,nfc,cfg80211
+snd_soc_core          192512  1 vc4
+snd_compress           20480  1 snd_soc_core
+snd_pcm_dmaengine      16384  1 snd_soc_core
+snd_pcm               102400  3 vc4,snd_pcm_dmaengine,snd_soc_core
+raspberrypi_hwmon      16384  0
+snd_timer              32768  1 snd_pcm
+hwmon                  16384  1 raspberrypi_hwmon
+snd                    77824  4 snd_compress,snd_timer,snd_soc_core,snd_pcm
+v3d                    73728  6
+gpu_sched              28672  1 v3d
+uio_pdrv_genirq        16384  0
+uio                    20480  1 uio_pdrv_genirq
+fixed                  16384  0
+******************************
+arping
+ash
+base64
+bash
+bash.bash
+busybox
+busybox.nosuid
+busybox.suid
+cat
+cat.coreutils
+chattr
+chattr.e2fsprogs
+chgrp
+chgrp.coreutils
+chmod
+chmod.coreutils
+chown
+chown.coreutils
+clockdiff
+cp
+cp.coreutils
+cpio
+date
+date.coreutils
+dd
+dd.coreutils
+df
+dmesg
+dmesg.util-linux
+dnsdomainname
+dumpkmap
+echo
+echo.coreutils
+ed
+egrep
+egrep.grep
+false
+false.coreutils
+fgrep
+fgrep.grep
+getopt
+getopt.util-linux
+grep
+grep.grep
+gtar
+gunzip
+gzip
+hostname
+hostname.coreutils
+kill
+kill.coreutils
+kill.procps
+kill.util-linux
+kmod
+ln
+ln.coreutils
+login
+login.shadow
+ls
+ls.coreutils
+lsmod
+lsmod.kmod
+mkdir
+mkdir.coreutils
+mknod
+mknod.coreutils
+mktemp
+more
+more.util-linux
+mount
+mount.util-linux
+mountpoint
+mountpoint.sysvinit
+mountpoint.util-linux
+mv
+mv.coreutils
+netstat
+nice
+pidof
+pidof.procps
+pidof.sysvinit
+ping
+ping.iputils
+ping6
+printenv
+ps
+ps.procps
+pwd
+pwd.coreutils
+red
+rm
+rm.coreutils
+rmdir
+rmdir.coreutils
+run-parts
+sed
+sed.sed
+sh
+sleep
+sleep.coreutils
+start_getty
+stat
+stat.coreutils
+stty
+stty.coreutils
+su
+su.shadow
+sync
+sync.coreutils
+tar
+tar.tar
+tftpd
+touch
+touch.coreutils
+tracepath
+traceroute6
+true
+true.coreutils
+umount
+umount.util-linux
+uname
+uname.coreutils
+usleep
+vi
+watch
+watch.procps
+zcat
+******************************
+kernel
+modules.alias
+modules.alias.bin
+modules.builtin
+modules.builtin.bin
+modules.dep
+modules.dep.bin
+modules.devname
+modules.order
+modules.softdep
+modules.symbols
+modules.symbols.bin
+******************************
+eth0      Link encap:Ethernet  HWaddr DC:A6:32:27:E2:20  
+          inet addr:192.168.1.245  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: 2600:1700:69f0:42c0:dea6:32ff:fe27:e220/64 Scope:Global
+          inet6 addr: fe80::dea6:32ff:fe27:e220/64 Scope:Link
+          inet6 addr: 2600:1700:69f0:42c0::44/64 Scope:Global
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:1513 errors:0 dropped:684 overruns:0 frame:0
+          TX packets:194 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:181684 (177.4 KiB)  TX bytes:24962 (24.3 KiB)
+

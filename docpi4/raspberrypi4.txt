@@ -1,0 +1,135 @@
+vidal@ws009:~/wkg/yocto-zeus-3.0$ mkdir raspberrypi4
+vidal@ws009:~/wkg/yocto-zeus-3.0$ cd raspberrypi4/
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4$ git clone -b zeus git://git.yoctoproject.org/poky.git
+Cloning into 'poky'...
+remote: Counting objects: 460200, done.
+remote: Compressing objects: 100% (108708/108708), done.
+remote: Total 460200 (delta 344429), reused 459874 (delta 344104)
+Receiving objects: 100% (460200/460200), 159.81 MiB | 4.10 MiB/s, done.
+Resolving deltas: 100% (344429/344429), done.
+Checking connectivity... done.
+Checking out files: 100% (4998/4998), done.
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4$ . poky/oe-init-build-env 
+
+Copy the repo meta-oe, meta-python, and meta-multimedia
+to vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/poky
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/repo120319/meta-openembedded$ git branch
+* zeus
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build$ rsync -avl --delete ../../repo120319/meta-openembedded/meta-oe ../poky
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build$ rsync -avl --delete ../../repo120319/meta-openembedded/meta-python ../poky
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build$ rsync -avl --delete ../../repo120319/meta-openembedded/meta-multimedia ../poky
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build$ rsync -avl --delete ../../poky/meta-raspberrypi ../poky/
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/poky/meta-raspberrypi$ git diff
+diff --git a/conf/machine/raspberrypi3.conf b/conf/machine/raspberrypi3.conf
+index 581e47c..43a0a25 100644
+--- a/conf/machine/raspberrypi3.conf
++++ b/conf/machine/raspberrypi3.conf
+@@ -18,3 +18,4 @@ UBOOT_MACHINE = "rpi_3_32b_config"
+ SERIAL_CONSOLES ?= "115200;ttyS0"
+ 
+ ARMSTUB ?= "armstub7.bin"
++ENABLE_UART = "1"
+diff --git a/conf/machine/raspberrypi4.conf b/conf/machine/raspberrypi4.conf
+index 1bcf931..0b91515 100644
+--- a/conf/machine/raspberrypi4.conf
++++ b/conf/machine/raspberrypi4.conf
+@@ -18,3 +18,4 @@ SERIAL_CONSOLES ?= "115200;ttyS0"
+ 
+ VC4DTBO ?= "vc4-fkms-v3d"
+ ARMSTUB ?= "armstub7.bin"
++ENABLE_UART = "1"
+
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build$ bitbake core-image-sato
+
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "raspberrypi4"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+meta-raspberrypi     = "master:ed6b75ba692b5d6bafd770f6669492db9cf97e37"
+meta-oe              
+meta-python          
+meta-multimedia      = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+
+7393 tasks
+
+root@ws009:/home/vidal/wkg/yocto-zeus-3.0/raspberrypi4/build/tmp/deploy/images/raspberrypi4# dd bs=16M if=core-image-sato-raspberrypi4.rpi-sdimg of=/dev/sdb
+144+1 records in
+144+1 records out
+2420113408 bytes (2.4 GB, 2.3 GiB) copied, 442.73 s, 5.5 MB/s
+
+4279 packages installed.
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build$ bitbake meta-toolchain
+
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "raspberrypi4"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+meta-raspberrypi     = "master:ed6b75ba692b5d6bafd770f6669492db9cf97e37"
+meta-oe              
+meta-python          
+meta-multimedia      = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
+
+3623 tasks
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build/tmp/deploy/sdk$ ./poky-glibc-x86_64-meta-toolchain-cortexa7t2hf-neon-vfpv4-raspberrypi4-toolchain-3.0.1.sh
+Enter target directory for SDK (default: /opt/poky/3.0.1): /opt/poky/3.0.1/rpi4
+
+https://github.com/gumstix/yocto-manifest/wiki/Cross-Compile-with-Yocto-SDK
+
+https://www.yoctoproject.org/docs/2.1.1/sdk-manual/sdk-manual.html
+
+Testing compile helloworld.c for the rpi4 32 bit using the yocto sdk.
+
+Set the enviorment for raspberrypi4 yocto sdk.
+
+. /opt/poky/3.0.1/rpi4/environment-setup-cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+Test C helloworld.c 
+    #include <stdio.h>
+    int main() {
+       // printf() displays the string inside quotation
+       printf("Hello, World!");
+       return 0;
+    }
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4$ make helloworld
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4$ file helloworld
+helloworld: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-, BuildID[sha1]=b0eb14f8ad2ea4f9fe54caf04a10f93545c292db, for GNU/Linux 3.2.0, not stripped
+
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4$ arm-poky-linux-gnueabi-gcc -v
+Using built-in specs.
+COLLECT_GCC=arm-poky-linux-gnueabi-gcc
+COLLECT_LTO_WRAPPER=/opt/poky/3.0.1/rpi4/sysroots/x86_64-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/9.2.0/lto-wrapper
+Target: arm-poky-linux-gnueabi
+Configured with: ../../../../../../work-shared/gcc-9.2.0-r0/gcc-9.2.0/configure --build=x86_64-linux --host=x86_64-pokysdk-linux --target=arm-poky-linux-gnueabi --prefix=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr --exec_prefix=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr --bindir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi --sbindir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi --libexecdir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi --datadir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/share --sysconfdir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/etc --sharedstatedir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/com --localstatedir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/var --libdir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/lib/arm-poky-linux-gnueabi --includedir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/include --oldincludedir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/include --infodir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/share/info --mandir=/opt/poky/3.0.1/sysroots/x86_64-pokysdk-linux/usr/share/man --disable-silent-rules --disable-dependency-tracking --with-libtool-sysroot=/home/vidal/wkg/yocto-zeus-3.0/raspberrypi4/build/tmp/work/x86_64-nativesdk-pokysdk-linux/gcc-cross-canadian-arm/9.2.0-r0/recipe-sysroot --with-gnu-ld --enable-shared --enable-languages=c,c++ --enable-threads=posix --enable-multilib --enable-default-pie --enable-c99 --enable-long-long --enable-symvers=gnu --enable-libstdcxx-pch --program-prefix=arm-poky-linux-gnueabi- --without-local-prefix --enable-lto --disable-libssp --enable-libitm --disable-bootstrap --disable-libmudflap --with-system-zlib --with-linker-hash-style=gnu --enable-linker-build-id --with-ppl=no --with-cloog=no --enable-checking=release --enable-cheaders=c_global --without-isl --with-gxx-include-dir=/not/exist/usr/include/c++/9.2.0 --with-build-time-tools=/home/vidal/wkg/yocto-zeus-3.0/raspberrypi4/build/tmp/work/x86_64-nativesdk-pokysdk-linux/gcc-cross-canadian-arm/9.2.0-r0/recipe-sysroot-native/usr/arm-poky-linux-gnueabi/bin --with-sysroot=/not/exist --with-build-sysroot=/home/vidal/wkg/yocto-zeus-3.0/raspberrypi4/build/tmp/work/x86_64-nativesdk-pokysdk-linux/gcc-cross-canadian-arm/9.2.0-r0/recipe-sysroot --enable-poison-system-directories --disable-static --enable-nls --with-glibc-version=2.28 --enable-initfini-array
+Thread model: posix
+gcc version 9.2.0 (GCC) 
+  
