@@ -1,0 +1,137 @@
+cd ~/wkg/yocto-zeus-3.0/
+
+/home/vidal/wkg/yocto-zeus-3.0
+
+mkdir rpi4-64
+ 
+cd ../repo120319/
+
+/home/vidal/wkg/yocto-zeus-3.0/repo120319
+
+git clone -b zeus git://git.yoctoproject.org/poky.git
+
+git clone git://git.yoctoproject.org/meta-raspberrypi
+
+rsync -avl --delete poky ../rpi4-64/
+
+rsync -avl --delete meta-raspberrypi ../rpi4-64/poky/
+
+rsync -avl --delete meta-openembedded/meta-python ../rpi4-64/poky/
+
+rsync -avl --delete meta-openembedded/meta-oe ../rpi4-64/poky/
+
+rsync -avl --delete meta-openembedded/meta-multimedia ../rpi4-64/poky/
+
+cd ../
+
+/home/vidal/wkg/yocto-zeus-3.0/rpi4-64
+
+. poky/oe-init-build-env
+
+You had no conf/local.conf file. This configuration file has therefore been
+created for you with some default values. You may wish to edit it to, for
+example, select a different MACHINE (target hardware). See conf/local.conf
+for more information as common configuration options are commented.
+
+You had no conf/bblayers.conf file. This configuration file has therefore been
+created for you with some default values. To add additional metadata layers
+into your configuration please add entries to conf/bblayers.conf.
+
+The Yocto Project has extensive documentation about OE including a reference
+manual which can be found at:
+    http://yoctoproject.org/documentation
+
+For more information about OpenEmbedded see their website:
+    http://www.openembedded.org/
+
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-sato
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86'
+
+
+/home/vidal/wkg/yocto-zeus-3.0/rpi4-64/build
+
+bitbake core-image-sato
+
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "ubuntu-16.04"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "raspberrypi4-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "aarch64 cortexa72 crc crypto"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+meta-raspberrypi     = "master:3ae288aa38e3a1609c6e861918a874416d3f0f13"
+meta-oe              
+meta-python          
+meta-multimedia      = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+
+7393 tasks
+
+08:53:00
+12:48:00
+/home/vidal/wkg/yocto-zeus-3.0/rpi4-64/build/tmp/deploy/images/raspberrypi4-64
+
+sudo dd bs=16M if=core-image-sato-raspberrypi4-64.rpi-sdimg status='progress' 
+of=/dev/sdb
+[sudo] password for vidal: 
+2499805184 bytes (2.5 GB, 2.3 GiB) copied, 3.06925 s, 814 MB/s
+155+1 records in
+155+1 records out
+2608857088 bytes (2.6 GB, 2.4 GiB) copied, 466.702 s, 5.6 MB/s
+
+/home/vidal/wkg/yocto-zeus-3.0/rpi4-64/build
+
+bitbake meta-toolchain
+
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "raspberrypi4-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "aarch64 cortexa72 crc crypto"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+meta-raspberrypi     = "master:3ae288aa38e3a1609c6e861918a874416d3f0f13"
+meta-oe              
+meta-python          
+meta-multimedia      = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+
+3623 tasks
+
+bitbake core-image-sato -c populate_sdk_ext
+8128 tasks
+
+/home/vidal/wkg/yocto-zeus-3.0/rpi4-64/build/tmp/deploy/sdk
+
+./poky-glibc-x86_64-meta-toolchain-aarch64-raspberrypi4-64-toolchain-3.0.1.sh
+
+Poky (Yocto Project Reference Distro) SDK installer version 3.0.1
+=================================================================
+Enter target directory for SDK (default: /opt/poky/3.0.1): /opt/poky/3.0.1/rpi4-64
+You are about to install the SDK to "/opt/poky/3.0.1/rpi4-64". Proceed [Y/n]? Y
+[sudo] password for vidal: 
+Extracting SDK........................................done
+Setting it up...done
+SDK has been successfully set up and is ready to be used.
+Each time you wish to use the SDK in a new shell session, you need to source the environment setup script e.g.
+ $ . /opt/poky/3.0.1/rpi4-64/environment-setup-aarch64-poky-linux

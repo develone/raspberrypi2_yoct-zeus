@@ -1,3 +1,541 @@
+cd ~/wkg/yocto-zeus-3.0/
+
+/home/vidal/wkg/yocto-zeus-3.0
+
+mkdir rpi4
+ 
+cd ../repo120319/
+
+/home/vidal/wkg/yocto-zeus-3.0/repo120319
+
+git clone -b zeus git://git.yoctoproject.org/poky.git
+
+git clone git://git.yoctoproject.org/meta-raspberrypi
+
+rsync -avl --delete poky ../rpi4/
+
+rsync -avl --delete meta-raspberrypi ../rpi4/poky/
+
+rsync -avl --delete meta-openembedded/meta-python ../rpi4/poky/
+
+rsync -avl --delete meta-openembedded/meta-oe ../rpi4/poky/
+
+rsync -avl --delete meta-openembedded/meta-multimedia ../rpi4/poky/
+
+cd ../
+
+/home/vidal/wkg/yocto-zeus-3.0/rpi4
+
+. poky/oe-init-build-env
+
+You had no conf/local.conf file. This configuration file has therefore been
+created for you with some default values. You may wish to edit it to, for
+example, select a different MACHINE (target hardware). See conf/local.conf
+for more information as common configuration options are commented.
+
+You had no conf/bblayers.conf file. This configuration file has therefore been
+created for you with some default values. To add additional metadata layers
+into your configuration please add entries to conf/bblayers.conf.
+
+The Yocto Project has extensive documentation about OE including a reference
+manual which can be found at:
+    http://yoctoproject.org/documentation
+
+For more information about OpenEmbedded see their website:
+    http://www.openembedded.org/
+
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-sato
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86'
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
+ 
+/home/vidal/wkg/yocto-zeus-3.0/rpi4/build 
+
+bitbake core-image-sato
+
+12/09/19 09:13 
+2566   10:08:02      34.7% done
+4001   11:13:11      54.1% done
+5245   11:13:11      70.9% done
+7385   13:02:54      99.8% done          
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "ubuntu-16.04"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "raspberrypi4"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+meta-raspberrypi     = "master:3ae288aa38e3a1609c6e861918a874416d3f0f13"
+meta-oe              
+meta-python          
+meta-multimedia      = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+
+7393 tasks
+vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4/build$ ls -la tmp/deploy/images/raspberrypi4/core-image-sato-raspberrypi4.rpi-sdimg 
+lrwxrwxrwx 2 vidal vidal 60 Dec  9 13:07 tmp/deploy/images/raspberrypi4/core-image-sato-raspberrypi4.rpi-sdimg -> core-image-sato-raspberrypi4-20191209161424.rootfs.rpi-sdimg
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4/build$ ls -la tmp/deploy/images/raspberrypi4/core-image-sato-raspberrypi4-20191209161424.rootfs.rpi-sdimg 
+-rw-r--r-- 2 vidal vidal 2420113408 Dec  9 13:07 tmp/deploy/images/raspberrypi4/core-image-sato-raspberrypi4-20191209161424.rootfs.rpi-sdimg
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4/build/tmp/deploy/images/raspberrypi4$ sudo dd bs=16M if=core-image-sato-raspberrypi4.rpi-sdimg status='progress' of=/dev/sdb
+2080374784 bytes (2.1 GB, 1.9 GiB) copied, 2.01366 s, 1.0 GB/s
+144+1 records in
+144+1 records out
+2420113408 bytes (2.4 GB, 2.3 GiB) copied, 304.194 s, 8.0 MB/s
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4/build$ bitbake meta-toolchain
+
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "raspberrypi4"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+meta-raspberrypi     = "master:3ae288aa38e3a1609c6e861918a874416d3f0f13"
+meta-oe              
+meta-python          
+meta-multimedia      = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+
+3623 tasks
+13:52:00
+15:03:33
+
+bitbake core-image-sato -c populate_sdk_ext
+
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "raspberrypi4"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.1"
+TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+meta-raspberrypi     = "master:3ae288aa38e3a1609c6e861918a874416d3f0f13"
+meta-oe              
+meta-python          
+meta-multimedia      = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
+
+8128 tasks
+15:03:33
+cd tmp/deploy/sdk/
+/home/vidal/wkg/yocto-zeus-3.0/rpi4/build/tmp/deploy/sdk
+./poky-glibc-x86_64-meta-toolchain-cortexa7t2hf-neon-vfpv4-raspberrypi4-toolchain-3.0.1.sh
+Poky (Yocto Project Reference Distro) SDK installer version 3.0.1
+=================================================================
+Enter target directory for SDK (default: /opt/poky/3.0.1): /opt/poky/3.0.1/rpi4
+You are about to install the SDK to "/opt/poky/3.0.1/rpi4". Proceed [Y/n]? Y
+[sudo] password for vidal: 
+Extracting SDK.........................................done
+Setting it up...done
+SDK has been successfully set up and is ready to be used.
+Each time you wish to use the SDK in a new shell session, you need to source the environment setup script e.g.
+ $ . /opt/poky/3.0.1/rpi4/environment-setup-cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+ERROR: core-image-sato-1.0-r0 do_sdk_depends: The file /lib/firmware/brcm/brcmfmac43430-sdio.bin is installed by both linux-firmware and linux-firmware-rpidistro, aborting
+ERROR: Logfile of failure stored in: /home/vidal/wkg/yocto-zeus-3.0/rpi4/build/tmp/work/raspberrypi4-poky-linux-gnueabi/core-image-sato/1.0-r0/temp/log.do_sdk_depends.23806
+ERROR: Task (/home/vidal/wkg/yocto-zeus-3.0/rpi4/poky/meta/recipes-sato/images/core-image-sato.bb:do_sdk_depends) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 8127 tasks of which 7759 didn't need to be rerun and 1 failed.
+
+Summary: 1 task failed:
+  /home/vidal/wkg/yocto-zeus-3.0/rpi4/poky/meta/recipes-sato/images/core-image-sato.bb:do_sdk_depends
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+
+/home/vidal/wkg/test-yocto-sdk/helloworld
+vidal@ws009:~/wkg/test-yocto-sdk/helloworld$ make
+cc -I . -c main.c
+cc -I . -c module.c
+cc main.o module.o -o target_bin
+file target_bin 
+target_bin: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 2.6.32, BuildID[sha1]=6a6b179da62e5f793349bb9e738a80cd15b15ecb, not stripped
+
+make
+"gcc" -I . -c main.c
+"gcc" -I . -c module.c
+"gcc" main.o module.o -o target_bin
+file target_bin 
+target_bin: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 2.6.32, BuildID[sha1]=6a6b179da62e5f793349bb9e738a80cd15b15ecb, not stripped
+
+. /opt/poky/3.0.1/rpi4/environment-setup-cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+make -e
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -I . -c main.c
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi -I . -c module.c
+arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/poky/3.0.1/rpi4/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi main.o module.o -o target_bin
+
+file target_bin 
+target_bin: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-, BuildID[sha1]=cc61c5d244dbe0c0b5cc4755605e738573403cb9, for GNU/Linux 3.2.0, not stripped
+
+/home/devel
+
+rsync -avl --delete vidal@ws009:~/wkg/test-yocto-sdk .
+
+cd test-yocto-sdk/helloworld/
+
+/home/devel/test-yocto-sdk/helloworld
+
+./target_bin 
+Hello World!
+
+/home/vidal/wkg/test-yocto-sdk/svd_rgb/src
+
+make
+
+gcc -c -o obj/svd.o svd.c -I../include
+gcc -c -o obj/disp_mat.o disp_mat.c -I../include
+gcc -c -o obj/mul_mat.o mul_mat.c -I../include
+gcc -c -o obj/pnmio.o pnmio.c -I../include
+gcc -c -o obj/error.o error.c -I../include
+gcc -c -o obj/mythread.o mythread.c -I../include
+mythread.c: In function ‘mysvd’:
+mythread.c:58:49: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘pthread_t’ {aka ‘long unsigned int’} [-Wformat=]
+    printf("\n 1st thread processing th_id[0] 0x%x\n",th_id[0]);
+                                                ~^    ~~~~~~~~
+                                                %lx
+mythread.c:120:18: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pa 0x%x ppa 0x%x  \n",th0.pa,th0.ppa);
+                 ~^               ~~~~~~
+mythread.c:120:27: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pa 0x%x ppa 0x%x  \n",th0.pa,th0.ppa);
+                          ~^             ~~~~~~~
+mythread.c:121:20: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pv = 0x%x ppv = 0x%x \n",th0.pv,th0.ppv);
+                   ~^                ~~~~~~
+mythread.c:121:31: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pv = 0x%x ppv = 0x%x \n",th0.pv,th0.ppv);
+                              ~^            ~~~~~~~
+mythread.c:122:21: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pvt = 0x%x ppvt = 0x%x \n",th0.pvt,th0.ppvt);
+                    ~^                 ~~~~~~~
+mythread.c:122:33: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pvt = 0x%x ppvt = 0x%x \n",th0.pvt,th0.ppvt);
+                                ~^             ~~~~~~~~
+mythread.c:123:21: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pds = 0x%x ppds = 0x%x \n",th0.pds,th0.ppds);
+                    ~^                 ~~~~~~~
+mythread.c:123:33: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pds = 0x%x ppds = 0x%x \n",th0.pds,th0.ppds);
+                                ~^             ~~~~~~~~
+mythread.c:124:22: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("puds = 0x%x ppuds = 0x%x \n",th0.puds,th0.ppuds);
+                     ~^                  ~~~~~~~~
+mythread.c:124:35: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("puds = 0x%x ppuds = 0x%x \n",th0.puds,th0.ppuds);
+                                  ~^              ~~~~~~~~~
+mythread.c:125:24: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pudsvt = 0x%x ppudsvt = 0x%x \n",th0.pudsvt,th0.ppudsvt);
+                       ~^                    ~~~~~~~~~~
+mythread.c:125:39: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pudsvt = 0x%x ppudsvt = 0x%x \n",th0.pudsvt,th0.ppudsvt);
+                                      ~^                ~~~~~~~~~~~
+mythread.c:201:46: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘FILE *’ {aka ‘struct _IO_FILE *’} [-Wformat=]
+    printf("ps converted from float to int 0x%x \n",th0.outptr);
+                                             ~^     ~~~~~~~~~~
+mythread.c:220:49: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘pthread_t’ {aka ‘long unsigned int’} [-Wformat=]
+    printf("\n 2nd thread processing th_id[1] 0x%x\n",th_id[1]);
+                                                ~^    ~~~~~~~~
+                                                %lx
+mythread.c:283:18: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pa 0x%x ppa 0x%x  \n",th1.pa,th1.ppa);
+                 ~^               ~~~~~~
+mythread.c:283:27: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pa 0x%x ppa 0x%x  \n",th1.pa,th1.ppa);
+                          ~^             ~~~~~~~
+mythread.c:284:20: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pv = 0x%x ppv = 0x%x \n",th1.pv,th1.ppv);
+                   ~^                ~~~~~~
+mythread.c:284:31: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pv = 0x%x ppv = 0x%x \n",th1.pv,th1.ppv);
+                              ~^            ~~~~~~~
+mythread.c:285:21: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pvt = 0x%x ppvt = 0x%x \n",th1.pvt,th1.ppvt);
+                    ~^                 ~~~~~~~
+mythread.c:285:33: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pvt = 0x%x ppvt = 0x%x \n",th1.pvt,th1.ppvt);
+                                ~^             ~~~~~~~~
+mythread.c:286:21: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pds = 0x%x ppds = 0x%x \n",th1.pds,th1.ppds);
+                    ~^                 ~~~~~~~
+mythread.c:286:33: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pds = 0x%x ppds = 0x%x \n",th1.pds,th1.ppds);
+                                ~^             ~~~~~~~~
+mythread.c:287:22: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("puds = 0x%x ppuds = 0x%x \n",th1.puds,th1.ppuds);
+                     ~^                  ~~~~~~~~
+mythread.c:287:35: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("puds = 0x%x ppuds = 0x%x \n",th1.puds,th1.ppuds);
+                                  ~^              ~~~~~~~~~
+mythread.c:288:24: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pudsvt = 0x%x ppudsvt = 0x%x \n",th1.pudsvt,th1.ppudsvt);
+                       ~^                    ~~~~~~~~~~
+mythread.c:288:39: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pudsvt = 0x%x ppudsvt = 0x%x \n",th1.pudsvt,th1.ppudsvt);
+                                      ~^                ~~~~~~~~~~~
+mythread.c:364:46: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘FILE *’ {aka ‘struct _IO_FILE *’} [-Wformat=]
+    printf("ps converted from float to int 0x%x \n",th1.outptr);
+                                             ~^     ~~~~~~~~~~
+mythread.c:383:49: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘pthread_t’ {aka ‘long unsigned int’} [-Wformat=]
+    printf("\n 3rd thread processing th_id[2] 0x%x\n",th_id[2]);
+                                                ~^    ~~~~~~~~
+                                                %lx
+mythread.c:446:18: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pa 0x%x ppa 0x%x  \n",th2.pa,th2.ppa);
+                 ~^               ~~~~~~
+mythread.c:446:27: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pa 0x%x ppa 0x%x  \n",th2.pa,th2.ppa);
+                          ~^             ~~~~~~~
+mythread.c:447:20: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pv = 0x%x ppv = 0x%x \n",th2.pv,th2.ppv);
+                   ~^                ~~~~~~
+mythread.c:447:31: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pv = 0x%x ppv = 0x%x \n",th2.pv,th2.ppv);
+                              ~^            ~~~~~~~
+mythread.c:448:21: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pvt = 0x%x ppvt = 0x%x \n",th2.pvt,th2.ppvt);
+                    ~^                 ~~~~~~~
+mythread.c:448:33: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pvt = 0x%x ppvt = 0x%x \n",th2.pvt,th2.ppvt);
+                                ~^             ~~~~~~~~
+mythread.c:449:21: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pds = 0x%x ppds = 0x%x \n",th2.pds,th2.ppds);
+                    ~^                 ~~~~~~~
+mythread.c:449:33: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pds = 0x%x ppds = 0x%x \n",th2.pds,th2.ppds);
+                                ~^             ~~~~~~~~
+mythread.c:450:22: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("puds = 0x%x ppuds = 0x%x \n",th2.puds,th2.ppuds);
+                     ~^                  ~~~~~~~~
+mythread.c:450:35: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("puds = 0x%x ppuds = 0x%x \n",th2.puds,th2.ppuds);
+                                  ~^              ~~~~~~~~~
+mythread.c:451:24: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘float *’ [-Wformat=]
+    printf("pudsvt = 0x%x ppudsvt = 0x%x \n",th2.pudsvt,th2.ppudsvt);
+                       ~^                    ~~~~~~~~~~
+mythread.c:451:39: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘float **’ [-Wformat=]
+    printf("pudsvt = 0x%x ppudsvt = 0x%x \n",th2.pudsvt,th2.ppudsvt);
+                                      ~^                ~~~~~~~~~~~
+mythread.c:527:46: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘FILE *’ {aka ‘struct _IO_FILE *’} [-Wformat=]
+    printf("ps converted from float to int 0x%x \n",th2.outptr);
+                                             ~^     ~~~~~~~~~~
+gcc -c -o obj/trans_mat.o trans_mat.c -I../include
+gcc -c -o obj/master.o master.c -I../include
+master.c: In function ‘main’:
+master.c:87:16: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 2 has type ‘pthread_t’ {aka ‘long unsigned int’} [-Wformat=]
+     printf("0x%x\n",th_id[0]);
+               ~^    ~~~~~~~~
+               %lx
+gcc -o master obj/svd.o obj/disp_mat.o obj/mul_mat.o obj/pnmio.o obj/error.o obj/mythread.o obj/trans_mat.o obj/master.o -I../include -lm -lpthread
+
+make clean
+
+make -e
+file master
+master: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 2.6.32, BuildID[sha1]=9869b08f9287d55ac86e74a205a700346c9d72a0, not stripped
+
+/home/devel/test-yocto-sdk/svd_rgb/src
+
+time ./master
+
+real	0m6.609s
+user	0m6.547s
+sys	0m0.050s
+
+file master
+master: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-, BuildID[sha1]=e1e6770965b7114ec0c744521d37a81248ccf6ee, for GNU/Linux 3.2.0, not stripped
+
+/home/vidal/wkg/test-yocto-sdk/icestorm
+
+make -e
+make -C icebox all
+make[1]: Entering directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icebox'
+python3 icebox_chipdb.py -3 > chipdb-384.new
+mv chipdb-384.new chipdb-384.txt
+python3 icebox_chipdb.py > chipdb-1k.new
+mv chipdb-1k.new chipdb-1k.txt
+python3 icebox_chipdb.py -8 > chipdb-8k.new
+mv chipdb-8k.new chipdb-8k.txt
+python3 icebox_chipdb.py -5 > chipdb-5k.new
+mv chipdb-5k.new chipdb-5k.txt
+python3 icebox_chipdb.py -4 > chipdb-lm4k.new
+mv chipdb-lm4k.new chipdb-lm4k.txt
+make[1]: Leaving directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icebox'
+make -C icepack all
+make[1]: Entering directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icepack'
+g++ -MD -O0 -ggdb -Wall -std=c++11 -I/usr/local/include   -c -o icepack.o icepack.cc
+g++ -o icepack  icepack.o -lm -lstdc++
+ln -sf icepack iceunpack
+make[1]: Leaving directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icepack'
+make -C iceprog all
+make[1]: Entering directory '/home/vidal/wkg/test-yocto-sdk/icestorm/iceprog'
+cc -MD -O0 -ggdb -Wall -std=c99 -I/usr/local/include    -c -o iceprog.o iceprog.c
+cc -o iceprog  iceprog.o -L/usr/local/lib -lm -lftdi
+make[1]: Leaving directory '/home/vidal/wkg/test-yocto-sdk/icestorm/iceprog'
+make -C icemulti all
+make[1]: Entering directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icemulti'
+g++ -MD -O0 -ggdb -Wall -std=c++11 -I/usr/local/include   -c -o icemulti.o icemulti.cc
+g++ -o icemulti  icemulti.o -lm -lstdc++
+make[1]: Leaving directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icemulti'
+make -C icepll all
+make[1]: Entering directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icepll'
+g++ -MD -O0 -ggdb -Wall -std=c++11 -I/usr/local/include   -c -o icepll.o icepll.cc
+g++ -o icepll  icepll.o -lm -lstdc++
+make[1]: Leaving directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icepll'
+make -C icetime all
+make[1]: Entering directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icetime'
+python3 timings.py > timings.inc.new
+mv timings.inc.new timings.inc
+g++ -MD -O0 -ggdb -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o icetime.o icetime.cc
+icetime.cc: In function ‘std::__cxx11::string ecnetname_to_vlog(std::__cxx11::string)’:
+icetime.cc:1323:32: warning: catching polymorphic type ‘class std::invalid_argument’ by value [-Wcatch-value=]
+  } catch(std::invalid_argument e) { // Not numeric and stoi throws exception
+                                ^
+g++ -o icetime  icetime.o -lm -lstdc++
+make[1]: Leaving directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icetime'
+make -C icebram all
+make[1]: Entering directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icebram'
+g++ -MD -O0 -ggdb -Wall -std=c++11 -I/usr/local/include   -c -o icebram.o icebram.cc
+g++ -o icebram  icebram.o -lm -lstdc++
+make[1]: Leaving directory '/home/vidal/wkg/test-yocto-sdk/icestorm/icebram'
+
+/home/vidal/wkg/test-yocto-sdk/arachne-pnr
+make -e
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/arachne-pnr.o src/arachne-pnr.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/netlist.o src/netlist.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/blif.o src/blif.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/pack.o src/pack.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/place.o src/place.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/util.o src/util.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/io.o src/io.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/route.o src/route.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/chipdb.o src/chipdb.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/location.o src/location.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/configuration.o src/configuration.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/line_parser.o src/line_parser.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/pcf.o src/pcf.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/global.o src/global.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/constant.o src/constant.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/designstate.o src/designstate.cc
+echo "const char *version_str = \"arachne-pnr 0.1+325+0 (git sha1 840bdfd, g++ `g++ --version | tr ' ()' '\n' | grep '^[0-9]' | head -n1` -O2)\";" > src/version_12247.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror   -c -o src/version_12247.o src/version_12247.cc
+g++ -Isrc -std=c++11 -MD -O2 -Wall -Wshadow -Wsign-compare -Werror  -o bin/arachne-pnr src/arachne-pnr.o src/netlist.o src/blif.o src/pack.o src/place.o src/util.o src/io.o src/route.o src/chipdb.o src/location.o src/configuration.o src/line_parser.o src/pcf.o src/global.o src/constant.o src/designstate.o src/version_12247.o -lm
+cp bin/arachne-pnr bin/arachne-pnr-host
+mkdir -p share/arachne-pnr
+./bin/arachne-pnr-host -d 384 -c /usr/local/share/icebox/chipdb-384.txt --write-binary-chipdb share/arachne-pnr/chipdb-384.bin
+seed: 1
+device: 384
+read_chipdb /usr/local/share/icebox/chipdb-384.txt...
+write_binary_chipdb share/arachne-pnr/chipdb-384.bin
+mkdir -p share/arachne-pnr
+./bin/arachne-pnr-host -d 1k -c /usr/local/share/icebox/chipdb-1k.txt --write-binary-chipdb share/arachne-pnr/chipdb-1k.bin
+seed: 1
+device: 1k
+read_chipdb /usr/local/share/icebox/chipdb-1k.txt...
+write_binary_chipdb share/arachne-pnr/chipdb-1k.bin
+mkdir -p share/arachne-pnr
+./bin/arachne-pnr-host -d 8k -c /usr/local/share/icebox/chipdb-8k.txt --write-binary-chipdb share/arachne-pnr/chipdb-8k.bin
+seed: 1
+device: 8k
+read_chipdb /usr/local/share/icebox/chipdb-8k.txt...
+write_binary_chipdb share/arachne-pnr/chipdb-8k.bin
+mkdir -p share/arachne-pnr
+./bin/arachne-pnr-host -d 8k -c /usr/local/share/icebox/chipdb-5k.txt --write-binary-chipdb share/arachne-pnr/chipdb-5k.bin
+seed: 1
+device: 8k
+read_chipdb /usr/local/share/icebox/chipdb-5k.txt...
+write_binary_chipdb share/arachne-pnr/chipdb-5k.bin
+mkdir -p share/arachne-pnr
+./bin/arachne-pnr-host -d 8k -c /usr/local/share/icebox/chipdb-lm4k.txt --write-binary-chipdb share/arachne-pnr/chipdb-lm4k.bin
+seed: 1
+device: 8k
+read_chipdb /usr/local/share/icebox/chipdb-lm4k.txt...
+write_binary_chipdb share/arachne-pnr/chipdb-lm4k.bin
+
+cd /home/devel/test-yocto-sdk/icestorm/
+
+make install
+
+cd ../arachne-pnr/
+
+make install
+
+  pass 81, 0 shared.
+
+After routing:
+span_4     15555 / 29696
+span_12    2734 / 5632
+
+  route time 1130.64s
+write_txt catzip.asc...
+ 
+icepack catzip.asc catzip.bin
+
+icetime -d hx8k -c 40 catzip.asc
+// Reading input .asc file..
+// Reading 8k chipdb file..
+// Creating timing netlist..
+// Timing estimate: 22.84 ns (43.79 MHz)
+// Checking 25.00 ns (40.00 MHz) clock constraint: PASSED.
+
+scp catzip.bin pi@mypi3-1:~/testbuilds/tbcc/
+
+diff Makefile Makefile.old 
+1c1
+< SUBDIRS = icebox icepack icemulti icepll icetime icebram iceprog
+---
+> SUBDIRS = icebox icepack iceprog icemulti icepll icetime icebram
+
+iceprog.c:27:10: fatal error: ftdi.h: No such file or directory
+   27 | #include <ftdi.h>
+      |          ^~~~~~~~
+compilation terminated.
+<builtin>: recipe for target 'iceprog.o' failed
+make[1]: *** [iceprog.o] Error 1
+make[1]: Leaving directory '/home/vidal/wkg/test-yocto-sdk/icestorm/iceprog'
+Makefile:7: recipe for target 'iceprog.all' failed
+make: *** [iceprog.all] Error 2
+arachne-pnr -d 8k -r -p catzip.pcf catzip.blif -o catzip.asc
+ 2020  git log
+ 2021  cd conf/
+ 2022  cd ..
+ 2023  git diff 3ae288aa ed6b75ba692b5d6bafd770f6669492db9cf97e37
+ 2024  git diff 3ae288aa ed6b75ba692
+ 2025  cd ../
+ 2026  rsync -avl --delete poky ../rpi4/
+ 2027  rsync -avl --delete meta-raspberrypi ../rpi4/poky/
+ 2028  rsync -avl --delete meta-openembedded/meta-python ../rpi4/poky/
+ 2029  rsync -avl --delete meta-openembedded/meta-oe ../rpi4/poky/
+ 2030  rsync -avl --delete meta-openembedded/meta-multimedia ../rpi4/poky/
+vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4$ . poky/oe-init-build-env 
+
+
 vidal@ws009:~/wkg/yocto-zeus-3.0$ mkdir raspberrypi4
 vidal@ws009:~/wkg/yocto-zeus-3.0$ cd raspberrypi4/
 vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4$ git clone -b zeus git://git.yoctoproject.org/poky.git
@@ -97,10 +635,28 @@ meta-python
 meta-multimedia      = "zeus:5d50b0549e5d91cb3072dada0e33a43dfb9e2071"
 
 3623 tasks
+before using populate_sdk_ext
+vidal@ws009:/opt/poky/3.0.1$ du -s rpi4/
+974136	rpi4/
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build$ bitbake core-image-sato -c populate_sdk_ext
+
+8128 tasks
 
 vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build/tmp/deploy/sdk$ ./poky-glibc-x86_64-meta-toolchain-cortexa7t2hf-neon-vfpv4-raspberrypi4-toolchain-3.0.1.sh
 Enter target directory for SDK (default: /opt/poky/3.0.1): /opt/poky/3.0.1/rpi4
-
+vidal@ws009:~/wkg/yocto-zeus-3.0/raspberrypi4/build$ tmp/deploy/sdk/poky-glibc-x86_64-meta-toolchain-cortexa7t2hf-neon-vfpv4-raspberrypi4-toolchain-3.0.1.sh 
+Poky (Yocto Project Reference Distro) SDK installer version 3.0.1
+=================================================================
+Enter target directory for SDK (default: /opt/poky/3.0.1): /opt/poky/3.0.1/rpi4
+The directory "/opt/poky/3.0.1/rpi4" already contains a SDK for this architecture.
+If you continue, existing files will be overwritten! Proceed [y/N]? Y
+[sudo] password for vidal: 
+Extracting SDK.........................................done
+Setting it up...done
+SDK has been successfully set up and is ready to be used.
+Each time you wish to use the SDK in a new shell session, you need to source the environment setup script e.g.
+ $ . /opt/poky/3.0.1/rpi4/environment-setup-cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
 https://github.com/gumstix/yocto-manifest/wiki/Cross-Compile-with-Yocto-SDK
 
 https://www.yoctoproject.org/docs/2.1.1/sdk-manual/sdk-manual.html
