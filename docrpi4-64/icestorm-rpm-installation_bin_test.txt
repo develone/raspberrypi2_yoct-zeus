@@ -1,0 +1,105 @@
+Yocto can create rpm or deb packages depending in the value
+of PACKAGE_CLASSES ?= "package_rpm" or PACKAGE_CLASSES ?= "package_deb"
+in the local.conf file.
+
+vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4-64$ . poky/oe-init-build-env
+This will setup the bitbake enviroment and chg to build folder.
+
+Create a recipe to cross compile the package icestorm retrieved for github.
+
+Create a layer to add the recipes to poky.
+meta-yosys-tools
+
+recipetool create -o icestorm_0.1.bb https://github.com/develone/icestorm.git
+
+https://github.com/develone/meta-yosys-tools/blob/master/recipes-icestorm/icestorm/icestorm_0.1.bb
+
+bitbake -DDD icestorm will compile & create rpms.
+
+do_cleansstate (1812): log.do_cleansstate.1812
+do_cleanall (1813): log.do_cleanall.1813
+do_fetch (1876): log.do_fetch.1876
+do_unpack (1897): log.do_unpack.1897
+do_prepare_recipe_sysroot (1898): log.do_prepare_recipe_sysroot.1898
+do_patch (1925): log.do_patch.1925
+do_populate_lic (1997): log.do_populate_lic.1997
+do_configure (1996): log.do_configure.1996
+do_compile (2009): log.do_compile.2009
+do_install (2132): log.do_install.2132
+do_package (2187): log.do_package.2187
+do_populate_sysroot (2188): log.do_populate_sysroot.2188
+do_packagedata (2541): log.do_packagedata.2541
+do_package_write_rpm (2576): log.do_package_write_rpm.2576
+do_package_qa (2577): log.do_package_qa.2577
+ 
+
+Transfer the rpm icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm from Ubuntu 16.04 x86_64.
+
+root@raspberrypi4-64:~# scp vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4-64/build/tmp/deploy/rpm/aarch64/icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm .
+md5sum icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm 
+9643e5f348f2e0b71e5e21e26792292d  icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm
+
+rpm -i --test icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm
+root@raspberrypi4-64:~# rpm -i  icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm 
+
+ls -la /usr/local/bin/
+total 3112
+drwxr-xr-x 2 root root    4096 Dec 12 16:44 .
+drwxr-xr-x 4 root root    4096 Dec 12 16:44 ..
+-rw-r--r-- 1 root root  202308 Dec 15  2019 icebox.py
+-rwxr-xr-x 1 root root   41540 Dec 15  2019 icebox_asc2hlc
+-rwxr-xr-x 1 root root   10421 Dec 15  2019 icebox_chipdb
+-rwxr-xr-x 1 root root    4928 Dec 15  2019 icebox_colbuf
+-rwxr-xr-x 1 root root    3641 Dec 15  2019 icebox_diff
+-rwxr-xr-x 1 root root    6183 Dec 15  2019 icebox_explain
+-rwxr-xr-x 1 root root   41499 Dec 15  2019 icebox_hlc2asc
+-rwxr-xr-x 1 root root   25936 Dec 15  2019 icebox_html
+-rwxr-xr-x 1 root root    4905 Dec 15  2019 icebox_maps
+-rwxr-xr-x 1 root root    4105 Dec 15  2019 icebox_stat
+-rwxr-xr-x 1 root root   42989 Dec 15  2019 icebox_vlog
+-rw-r--r-- 1 root root  927720 Dec 15  2019 iceboxdb.py
+-rwxr-xr-x 1 root root   88040 Dec 15  2019 icebram
+-rwxr-xr-x 1 root root   18416 Dec 15  2019 icemulti
+-rwxr-xr-x 1 root root  116712 Dec 15  2019 icepack
+-rwxr-xr-x 1 root root   14224 Dec 15  2019 icepll
+-rwxr-xr-x 1 root root   26576 Dec 15  2019 iceprog
+-rwxr-xr-x 1 root root 1534024 Dec 15  2019 icetime
+lrwxrwxrwx 1 root root       7 Dec 15  2019 iceunpack -> icepack
+
+ls -la /usr/local/share/icebox/
+total 91548
+drwxr-xr-x 2 root root     4096 Dec 12 16:44 .
+drwxr-xr-x 3 root root     4096 Dec 12 16:44 ..
+-rw-r--r-- 1 root root  7132281 Dec 15  2019 chipdb-1k.txt
+-rw-r--r-- 1 root root  1862656 Dec 15  2019 chipdb-384.txt
+-rw-r--r-- 1 root root 27750124 Dec 15  2019 chipdb-5k.txt
+-rw-r--r-- 1 root root 38050812 Dec 15  2019 chipdb-8k.txt
+-rw-r--r-- 1 root root 17729112 Dec 15  2019 chipdb-lm4k.txt
+-rw-r--r-- 1 root root    26700 Dec 15  2019 timings_hx1k.txt
+-rw-r--r-- 1 root root    26701 Dec 15  2019 timings_hx8k.txt
+-rw-r--r-- 1 root root    25713 Dec 15  2019 timings_lp1k.txt
+-rw-r--r-- 1 root root     9732 Dec 15  2019 timings_lp384.txt
+-rw-r--r-- 1 root root    25723 Dec 15  2019 timings_lp8k.txt
+-rw-r--r-- 1 root root   952812 Dec 15  2019 timings_up5k.txt
+
+mkdir test-icestorm
+
+cd test-icestorm/
+
+rsync -avl --delete mypi3-15:~/testbuilds/catzip .
+
+mkdir bin
+
+cd bin
+
+cp catzip/rtl/catzip/catzip.asc .
+
+icetime -d hx8k -c 45 catzip.asc
+// Reading input .asc file..
+// Reading 8k chipdb file..
+// Creating timing netlist..
+// Timing estimate: 22.08 ns (45.29 MHz)
+// Checking 22.22 ns (45.00 MHz) clock constraint: PASSED.
+
+icepack catzip.asc catzip.bin
+
