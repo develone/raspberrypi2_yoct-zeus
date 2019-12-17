@@ -33,54 +33,103 @@ do_package_write_rpm (2576): log.do_package_write_rpm.2576
 do_package_qa (2577): log.do_package_qa.2577
  
 
-Transfer the rpm icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm from Ubuntu 16.04 x86_64.
+	Transfer the rpm icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm from Ubuntu 16.04 x86_64.
+Transfer the rpm icestorm-0.1+git0+041c075e4a-r0.aarch64.rpm 
+root@raspberrypi4-64:~# scp vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4-64/build/tmp/work/aarch64-poky-linux/icestorm/0.1+gitAUTOINC+041c075e4a-r0/deploy-rpms/aarch64/icestorm-0.1+git0+041c075e4a-r0.aarch64.rpm .
+34eed52768584e5babb98a7523a67a7d  icestorm-0.1+git0+041c075e4a-r0.aarch64.rpm
 
-root@raspberrypi4-64:~# scp vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4-64/build/tmp/deploy/rpm/aarch64/icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm .
-md5sum icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm 
-9643e5f348f2e0b71e5e21e26792292d  icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm
+	root@raspberrypi4-64:~# scp vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4-64/build/tmp/deploy/rpm/aarch64/icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm .
+	md5sum icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm 
+	9643e5f348f2e0b71e5e21e26792292d  icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm
 
-rpm -i --test icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm
-root@raspberrypi4-64:~# rpm -i  icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm 
+	rpm -i --test icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm
+	root@raspberrypi4-64:~# rpm -i  icestorm-0.1+git0+8cac6c5840-r0.aarch64.rpm 
+	root@raspberrypi4-64:~# ls -la /opt/bin/
+total 2320
+drwxr-xr-x 2 root root   4096 Dec 13 14:33 .
+drwxr-xr-x 4 root root   4096 Dec 13 14:33 ..
+-rw-r--r-- 1 root root 218122 Dec 17  2019 icebox.py
+-rwxr-xr-x 1 root root  41701 Dec 17  2019 icebox_asc2hlc
+-rwxr-xr-x 1 root root  10546 Dec 17  2019 icebox_chipdb
+-rwxr-xr-x 1 root root   4977 Dec 17  2019 icebox_colbuf
+-rwxr-xr-x 1 root root   3683 Dec 17  2019 icebox_diff
+-rwxr-xr-x 1 root root   6257 Dec 17  2019 icebox_explain
+-rwxr-xr-x 1 root root  42991 Dec 17  2019 icebox_hlc2asc
+-rwxr-xr-x 1 root root  26021 Dec 17  2019 icebox_html
+-rwxr-xr-x 1 root root   4954 Dec 17  2019 icebox_maps
+-rwxr-xr-x 1 root root   4182 Dec 17  2019 icebox_stat
+-rwxr-xr-x 1 root root  43253 Dec 17  2019 icebox_vlog
+-rw-r--r-- 1 root root 927720 Dec 17  2019 iceboxdb.py
+-rwxr-xr-x 1 root root  34792 Dec 17  2019 icebram
+-rwxr-xr-x 1 root root  18416 Dec 17  2019 icemulti
+-rwxr-xr-x 1 root root  55272 Dec 17  2019 icepack
+-rwxr-xr-x 1 root root  14224 Dec 17  2019 icepll
+-rwxr-xr-x 1 root root  26576 Dec 17  2019 iceprog
+-rwxr-xr-x 1 root root 825416 Dec 17  2019 icetime
+lrwxrwxrwx 1 root root      7 Dec 17  2019 iceunpack -> icepack
 
-ls -la /usr/local/bin/
-total 3112
-drwxr-xr-x 2 root root    4096 Dec 12 16:44 .
-drwxr-xr-x 4 root root    4096 Dec 12 16:44 ..
--rw-r--r-- 1 root root  202308 Dec 15  2019 icebox.py
--rwxr-xr-x 1 root root   41540 Dec 15  2019 icebox_asc2hlc
--rwxr-xr-x 1 root root   10421 Dec 15  2019 icebox_chipdb
--rwxr-xr-x 1 root root    4928 Dec 15  2019 icebox_colbuf
--rwxr-xr-x 1 root root    3641 Dec 15  2019 icebox_diff
--rwxr-xr-x 1 root root    6183 Dec 15  2019 icebox_explain
--rwxr-xr-x 1 root root   41499 Dec 15  2019 icebox_hlc2asc
--rwxr-xr-x 1 root root   25936 Dec 15  2019 icebox_html
--rwxr-xr-x 1 root root    4905 Dec 15  2019 icebox_maps
--rwxr-xr-x 1 root root    4105 Dec 15  2019 icebox_stat
--rwxr-xr-x 1 root root   42989 Dec 15  2019 icebox_vlog
--rw-r--r-- 1 root root  927720 Dec 15  2019 iceboxdb.py
--rwxr-xr-x 1 root root   88040 Dec 15  2019 icebram
--rwxr-xr-x 1 root root   18416 Dec 15  2019 icemulti
--rwxr-xr-x 1 root root  116712 Dec 15  2019 icepack
--rwxr-xr-x 1 root root   14224 Dec 15  2019 icepll
--rwxr-xr-x 1 root root   26576 Dec 15  2019 iceprog
--rwxr-xr-x 1 root root 1534024 Dec 15  2019 icetime
-lrwxrwxrwx 1 root root       7 Dec 15  2019 iceunpack -> icepack
+	ls -la /usr/local/bin/
+	total 3112
+	drwxr-xr-x 2 root root    4096 Dec 12 16:44 .
+	drwxr-xr-x 4 root root    4096 Dec 12 16:44 ..
+	-rw-r--r-- 1 root root  202308 Dec 15  2019 icebox.py
+	-rwxr-xr-x 1 root root   41540 Dec 15  2019 icebox_asc2hlc
+	-rwxr-xr-x 1 root root   10421 Dec 15  2019 icebox_chipdb
+	-rwxr-xr-x 1 root root    4928 Dec 15  2019 icebox_colbuf
+	-rwxr-xr-x 1 root root    3641 Dec 15  2019 icebox_diff
+	-rwxr-xr-x 1 root root    6183 Dec 15  2019 icebox_explain
+	-rwxr-xr-x 1 root root   41499 Dec 15  2019 icebox_hlc2asc
+	-rwxr-xr-x 1 root root   25936 Dec 15  2019 icebox_html
+	-rwxr-xr-x 1 root root    4905 Dec 15  2019 icebox_maps
+	-rwxr-xr-x 1 root root    4105 Dec 15  2019 icebox_stat
+	-rwxr-xr-x 1 root root   42989 Dec 15  2019 icebox_vlog
+	-rw-r--r-- 1 root root  927720 Dec 15  2019 iceboxdb.py
+	-rwxr-xr-x 1 root root   88040 Dec 15  2019 icebram
+	-rwxr-xr-x 1 root root   18416 Dec 15  2019 icemulti
+	-rwxr-xr-x 1 root root  116712 Dec 15  2019 icepack
+	-rwxr-xr-x 1 root root   14224 Dec 15  2019 icepll
+	-rwxr-xr-x 1 root root   26576 Dec 15  2019 iceprog
+	-rwxr-xr-x 1 root root 1534024 Dec 15  2019 icetime
+	lrwxrwxrwx 1 root root       7 Dec 15  2019 iceunpack -> icepack
 
-ls -la /usr/local/share/icebox/
-total 91548
-drwxr-xr-x 2 root root     4096 Dec 12 16:44 .
-drwxr-xr-x 3 root root     4096 Dec 12 16:44 ..
--rw-r--r-- 1 root root  7132281 Dec 15  2019 chipdb-1k.txt
--rw-r--r-- 1 root root  1862656 Dec 15  2019 chipdb-384.txt
--rw-r--r-- 1 root root 27750124 Dec 15  2019 chipdb-5k.txt
--rw-r--r-- 1 root root 38050812 Dec 15  2019 chipdb-8k.txt
--rw-r--r-- 1 root root 17729112 Dec 15  2019 chipdb-lm4k.txt
--rw-r--r-- 1 root root    26700 Dec 15  2019 timings_hx1k.txt
--rw-r--r-- 1 root root    26701 Dec 15  2019 timings_hx8k.txt
--rw-r--r-- 1 root root    25713 Dec 15  2019 timings_lp1k.txt
--rw-r--r-- 1 root root     9732 Dec 15  2019 timings_lp384.txt
--rw-r--r-- 1 root root    25723 Dec 15  2019 timings_lp8k.txt
--rw-r--r-- 1 root root   952812 Dec 15  2019 timings_up5k.txt
+	ls -la /usr/local/share/icebox/
+	total 91548
+	drwxr-xr-x 2 root root     4096 Dec 12 16:44 .
+	drwxr-xr-x 3 root root     4096 Dec 12 16:44 ..
+	-rw-r--r-- 1 root root  7132281 Dec 15  2019 chipdb-1k.txt
+	-rw-r--r-- 1 root root  1862656 Dec 15  2019 chipdb-384.txt
+	-rw-r--r-- 1 root root 27750124 Dec 15  2019 chipdb-5k.txt
+	-rw-r--r-- 1 root root 38050812 Dec 15  2019 chipdb-8k.txt
+	-rw-r--r-- 1 root root 17729112 Dec 15  2019 chipdb-lm4k.txt
+	-rw-r--r-- 1 root root    26700 Dec 15  2019 timings_hx1k.txt
+	-rw-r--r-- 1 root root    26701 Dec 15  2019 timings_hx8k.txt
+	-rw-r--r-- 1 root root    25713 Dec 15  2019 timings_lp1k.txt
+	-rw-r--r-- 1 root root     9732 Dec 15  2019 timings_lp384.txt
+	-rw-r--r-- 1 root root    25723 Dec 15  2019 timings_lp8k.txt
+	-rw-r--r-- 1 root root   952812 Dec 15  2019 timings_up5k.txt
+
+
+root@raspberrypi4-64:~# ls -la /opt/share/icebox/
+total 110008
+drwxr-xr-x 2 root root     4096 Dec 13 14:33 .
+drwxr-xr-x 3 root root     4096 Dec 13 14:33 ..
+-rw-r--r-- 1 root root  7132281 Dec 17  2019 chipdb-1k.txt
+-rw-r--r-- 1 root root  1862656 Dec 17  2019 chipdb-384.txt
+-rw-r--r-- 1 root root 27750168 Dec 17  2019 chipdb-5k.txt
+-rw-r--r-- 1 root root 38050812 Dec 17  2019 chipdb-8k.txt
+-rw-r--r-- 1 root root 17729662 Dec 17  2019 chipdb-lm4k.txt
+-rw-r--r-- 1 root root 18575769 Dec 17  2019 chipdb-u4k.txt
+-rw-r--r-- 1 root root    26700 Dec 17  2019 timings_hx1k.txt
+-rw-r--r-- 1 root root    26701 Dec 17  2019 timings_hx8k.txt
+-rw-r--r-- 1 root root    25713 Dec 17  2019 timings_lp1k.txt
+-rw-r--r-- 1 root root     9732 Dec 17  2019 timings_lp384.txt
+-rw-r--r-- 1 root root    25723 Dec 17  2019 timings_lp8k.txt
+-rw-r--r-- 1 root root   293805 Dec 17  2019 timings_u4k.txt
+-rw-r--r-- 1 root root   952812 Dec 17  2019 timings_up5k.txt
+
+raspberrypi4-64:~$ export PATH=/opt/bin:$PATH
+raspberrypi4-64:~$ which icepack
+/opt/bin/icepack
 
 mkdir test-icestorm
 
@@ -101,5 +150,14 @@ icetime -d hx8k -c 45 catzip.asc
 // Timing estimate: 22.08 ns (45.29 MHz)
 // Checking 22.22 ns (45.00 MHz) clock constraint: PASSED.
 
-icepack catzip.asc catzip.bin
+raspberrypi4-64:~/test-icestorm/bin$ which icepack
+/opt/bin/icepack
+raspberrypi4-64:~/test-icestorm/bin$ rm -f catzip.bin 
+raspberrypi4-64:~/test-icestorm/bin$ icepack catzip.asc catzip.bin
+raspberrypi4-64:~/test-icestorm/bin$ ls -la
+total 3432
+drwxr-sr-x 2 devel devel    4096 Dec 13 14:41 .
+drwxr-sr-x 4 devel devel    4096 Dec 12 17:10 ..
+-rw-r--r-- 1 devel devel 3365699 Dec 12 17:11 catzip.asc
+-rw-r--r-- 1 devel devel  135100 Dec 13 14:41 catzip.bin
 

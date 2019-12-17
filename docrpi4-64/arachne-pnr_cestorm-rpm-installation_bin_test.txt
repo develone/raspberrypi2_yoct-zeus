@@ -4,24 +4,27 @@ catzip.asc from catzip.blif.
 The icestorm package was cross compiled using a yocto icestorm_0.1.bb recipe.
 The recipe created a rpm which was installed on rpi4-64.
 Testing creating catzip.bin from catzip.asc.
+Testing with icestorm-0.1+git0+041c075e4a-r0.aarch64.rpm which needs
+raspberrypi4-64:~$ export PATH=/opt/bin:$PATH
+
 
 raspberrypi4-64:~/test_arachne-pnr$ arachne-pnr -d 8k -r -p catzip.pcf catzip.blif -o catzip.asc
-  pass 23, 2 shared.
-  pass 24, 0 shared.
+  pass 52, 0 shared.
 
 After routing:
-span_4     14489 / 29696
-span_12    2464 / 5632
+span_4     14779 / 29696
+span_12    2661 / 5632
 
-  route time 333.57s
+  route time 813.76s
 write_txt catzip.asc...
+
 icepack catzip.asc catzip.bin
 
 raspberrypi4-64:~/test_arachne-pnr$ icetime -d hx8k -c 40 catzip.asc
 // Reading input .asc file..
 // Reading 8k chipdb file..
 // Creating timing netlist..
-// Timing estimate: 22.22 ns (45.00 MHz)
+// Timing estimate: 24.32 ns (41.11 MHz)
 // Checking 25.00 ns (40.00 MHz) clock constraint: PASSED.
 
 raspberrypi4-64:~/test_arachne-pnr$ scp catzip.bin pi@mypi3-1:~/testbuilds/tbcc/
