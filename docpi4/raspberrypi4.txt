@@ -74,13 +74,13 @@ bitbake core-image-sato
 Build Configuration:
 BB_VERSION           = "1.44.0"
 BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "ubuntu-16.04"
-TARGET_SYS           = "arm-poky-linux-gnueabi"
-MACHINE              = "raspberrypi4"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "raspberrypi4-64"
 DISTRO               = "poky"
 DISTRO_VERSION       = "3.0.1"
-TUNE_FEATURES        = "arm vfp cortexa7 neon vfpv4 thumb callconvention-hard"
-TARGET_FPU           = "hard"
+TUNE_FEATURES        = "aarch64 cortexa72 crc crypto"
+TARGET_FPU           = ""
 meta                 
 meta-poky            
 meta-yocto-bsp       = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
@@ -88,8 +88,8 @@ meta-raspberrypi     = "master:3ae288aa38e3a1609c6e861918a874416d3f0f13"
 meta-oe              
 meta-python          
 meta-multimedia      = "zeus:da81542171f0cab0ea1a9bf45ac3c256e6f343f9"
-
-7393 tasks
+meta-yosys-tools     = "master:fdbbf80e0c89aaf0d7655988fb1bbf05de6684be"
+7393 tasks with boost and octave 7458 tasks build 12/20/19
 vidal@ws009:~/wkg/yocto-zeus-3.0/rpi4/build$ ls -la tmp/deploy/images/raspberrypi4/core-image-sato-raspberrypi4.rpi-sdimg 
 lrwxrwxrwx 2 vidal vidal 60 Dec  9 13:07 tmp/deploy/images/raspberrypi4/core-image-sato-raspberrypi4.rpi-sdimg -> core-image-sato-raspberrypi4-20191209161424.rootfs.rpi-sdimg
 
